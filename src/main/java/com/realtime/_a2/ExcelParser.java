@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 public class ExcelParser {
     Matrik matrik ;
     FileSaver fileHandler;
-    
+
     static final List<String> KEYWORDS = Arrays.asList("null", "true", "false", 
             "abstract", "continue", "for", "new", "switch", "assert", "default", 
             "goto", "package", "synchronized", "boolean", "do", "if", "private",
@@ -37,11 +37,11 @@ public class ExcelParser {
         ExcelParser parser = new ExcelParser();
         parser.compute();
     }
-    
+
     public void compute() {
         final String[] headers = new String[4];
         List<Matrik> matriks = new ArrayList<>();
-        FileHandler fileHandler = new FileSaver();
+        fileHandler= new FileSaver();
 
         try (Stream<Path> paths = Files.walk(Paths.get("files/"))) {
             paths.filter(Files::isRegularFile).forEach(path -> {
@@ -87,7 +87,7 @@ public class ExcelParser {
                         });
                         // System.out.println("Total " + (actual + totalKeywords[0]));
 
-                        Matrik matrik = new Matrik(name[0], content.size(), blanks, comments, actual, wordCount, actual + totalKeywords[0]);
+                        matrik = new Matrik(name[0], content.size(), blanks, comments, actual, wordCount, actual + totalKeywords[0]);
                         matriks.add(matrik);
                     }
                 } catch (IOException e) {
@@ -101,4 +101,3 @@ public class ExcelParser {
         fileHandler.storeData(headers, matriks);
     }
 }
-

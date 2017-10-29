@@ -27,6 +27,10 @@ public class Matrik {
             this.wordCount = wordCount;
             this.total = total;
         }
+        
+        Matrik(){
+            
+        }
 
     /**
      * @return the name
